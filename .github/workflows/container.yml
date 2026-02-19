@@ -23,6 +23,7 @@ jobs:
          docker tag dempoappreg.azurecr.io/my-dotnet9-app:${{github.sha}} dempoappreg.azurecr.io/my-dotnet9-app:latest
          docker push dempoappreg.azurecr.io/my-dotnet9-app:latest
   deploy_job:
+    needs: build_job
     runs-on: ubuntu-latest
     steps:
       - name: Login to Azure
