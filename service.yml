@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Services
+metadata:
+  name: webapp-ser
+spec:
+  type: LoadBalancer
+  selector:
+      type: webapp
+  ports:
+    - protocol: TCP
+      port: 5133
+      targetport: 5133
