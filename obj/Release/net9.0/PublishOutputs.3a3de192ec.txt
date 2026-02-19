@@ -1,0 +1,7 @@
+C:\Practical\dotnetweb\demoapp\out\demoapp.exe
+C:\Practical\dotnetweb\demoapp\out\appsettings.Development.json
+C:\Practical\dotnetweb\demoapp\out\appsettings.json
+C:\Practical\dotnetweb\demoapp\out\demoapp.dll
+C:\Practical\dotnetweb\demoapp\out\demoapp.deps.json
+C:\Practical\dotnetweb\demoapp\out\demoapp.runtimeconfig.json
+C:\Practical\dotnetweb\demoapp\out\demoapp.pdb
