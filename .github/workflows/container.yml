@@ -40,5 +40,6 @@ jobs:
         run: |
           kubectl set image deployment/webapp-dep webapp=dempoappreg.azurecr.io/my-dotnet9-app:latest --record
           kubectl rollout status deployment/webapp-dep
+          echo "Deploying..."
 
             
