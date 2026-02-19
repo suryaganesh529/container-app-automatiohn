@@ -16,9 +16,9 @@ jobs:
           password: ${{secrets.ACR_PASSWORD}}
       - name: Build and push docker image
         run: |
-         docker build -t dempoappreg.azurecr.io/my-dotnet9-app:${{githhub.sha}} .
-         docker push dempoappreg.azurecr.io/my-dotnet9-app:${{githhub.sha}}
-         docker tag dempoappreg.azurecr.io/my-dotnet9-app:${{githhub.sha}} dempoappreg.azurecr.io/my-dotnet9-app:${{githhub.sha}}:latest
+         docker build -t dempoappreg.azurecr.io/my-dotnet9-app:${{github.sha}} .
+         docker push dempoappreg.azurecr.io/my-dotnet9-app:${{github.sha}}
+         docker tag dempoappreg.azurecr.io/my-dotnet9-app:${{github.sha}} dempoappreg.azurecr.io/my-dotnet9-app:${{githhub.sha}}:latest
          docker push dempoappreg.azurecr.io/my-dotnet9-app:latest
 
   deploy_job:
