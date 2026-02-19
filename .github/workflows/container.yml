@@ -39,8 +39,8 @@ jobs:
       - name: Deploy in AKS
         working-directory: k8s
         run: |
-          kubectl apply -f deployment.yml
-          kubectl apply -f service.yml
+          kubectl apply -f k8s/deployment.yml
+          kubectl apply -f k8s/service.yml
           kubectl rollout status deployment/webapp-dep
           echo "Deploying..."
 
