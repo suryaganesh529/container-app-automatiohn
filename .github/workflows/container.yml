@@ -37,6 +37,7 @@ jobs:
           cluster-name: demoapp888
           subscription: 671a27a4-2823-4844-9e89-77947b4b3e18
       - name: Deploy in AKS
+        working-directory: k8s
         run: |
           kubectl apply -f deployment.yml
           kubectl apply -f service.yml
