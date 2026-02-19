@@ -1,0 +1,37 @@
+name: Container Deployment
+on:
+ push:
+   branches: main
+jobs:
+  build_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Login to Azure container regitry
+        uses: azure/docker-login@v1
+        with:
+          login-server: dempoappreg.azurecr.io
+          username: ${{secrets.ACR_USERNAME}}
+          password: ${{secrets.ACR_PASSWORD}}
+      - name: Build and push docker image
+        run: |
+         docker build -t dempoappreg.azurecr.io/my-dotnet9-app:${{githhub.sha}} .
+         docker push dempoappreg.azurecr.io/my-dotnet9-app:${{githhub.sha}}
+         docker tag dempoappreg.azurecr.io/my-dotnet9-app:${{githhub.sha}} dempoappreg.azurecr.io/my-dotnet9-app:${{githhub.sha}}:latest
+         docker push dempoappreg.azurecr.io/my-dotnet9-app:latest
+
+  deploy_job:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Login to Azure
+          uses: azure-login@v1
+          with: 
+            creds: ${{secrets.AZURE_CREDENTIAL}}
+        - name: Deploy to Azure web app
+          uses: azure/webapps-deploy@v2
+          with:
+            app-name: demodotwebapp
+            images: dempoappreg.azurecr.io/my-dotnet9-app:latest
+
+
