@@ -1,7 +1,9 @@
 name: Container Deployment
 on:
  push:
-   branches: main
+   branches:
+      - main
+      - dev
 jobs:
   build_job:
     runs-on: ubuntu-latest
@@ -18,7 +20,7 @@ jobs:
         run: |
          docker build -t dempoappreg.azurecr.io/my-dotnet9-app:${{github.sha}} .
          docker push dempoappreg.azurecr.io/my-dotnet9-app:${{github.sha}}
-         docker tag dempoappreg.azurecr.io/my-dotnet9-app:${{github.sha}} dempoappreg.azurecr.io/my-dotnet9-app:${{githhub.sha}}:latest
+         docker tag dempoappreg.azurecr.io/my-dotnet9-app:${{github.sha}} dempoappreg.azurecr.io/my-dotnet9-app:${{github.sha}}:latest
          docker push dempoappreg.azurecr.io/my-dotnet9-app:latest
 
   deploy_job:
