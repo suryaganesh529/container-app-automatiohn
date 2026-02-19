@@ -38,7 +38,7 @@ jobs:
           cluster-name: demoapp888
       - name: Deploy in AKS
         run: |
-          kubectl set image deployment/webapp-dep webapp=dempoappreg.azurecr.io/my-dotnet9-app:latest --record
+          kubectl apply -f deployment.yml
           kubectl rollout status deployment/webapp-dep
           echo "Deploying..."
 
