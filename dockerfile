@@ -10,4 +10,4 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 WORKDIR /App
 COPY --from=build /App/out ./
 EXPOSE 5133
-ENTRYPOINT ["dotnet", "demoapp.dll"]
+ENTRYPOINT ["dotnet", "demoapp.dll"] 

@@ -1,7 +1,8 @@
-name: Container Deployment
+name: AKS Deployment
 on:
  push:
    branches:
+      - main
       - dev
 jobs:
   build_job:
@@ -21,17 +22,21 @@ jobs:
          docker push dempoappreg.azurecr.io/my-dotnet9-app:${{github.sha}}
          docker tag dempoappreg.azurecr.io/my-dotnet9-app:${{github.sha}} dempoappreg.azurecr.io/my-dotnet9-app:latest
          docker push dempoappreg.azurecr.io/my-dotnet9-app:latest
-
   deploy_job:
-      needs: build_job
-      runs-on: ubuntu-latest
-      steps:
-        - name: Login to Azure
-          uses: azure/login@v1
-          with: 
-            creds: ${{secrets.AZURE_CREDENTIAL}}
-        - name: Deploy to Azure web app
-          uses: azure/webapps-deploy@v2
-          with:
-            app-name: demodotwebapp
-            images: dempoappreg.azurecr.io/my-dotnet9-app:latest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{secrets.AZURE_CREDENTIAL}}
+      - name: Set AKS context
+        uses: azure/aks-set-context@v3
+        with:
+          creds: ${{secrets.AZURE_CREDENTIAL}}
+          resource-group: Devops
+          cluster-name: demoapp88
+      - name: Deploy in AKS
+        run: |
+          kubectl set image deployment/webapp-dep webapp=dempoappreg.azurecr.io/my-dotnet9-app:latest --record
+
+            
